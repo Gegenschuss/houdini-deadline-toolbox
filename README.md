@@ -37,26 +37,38 @@ library — no other repo dependencies.
 
 ## Install
 
-The submitters are designed to live inside a Houdini HDA's `PythonModule`
-section.  The button on the HDA invokes the entry point.
+1. Clone the repo.
+2. Run the installer from a terminal:
 
-1. Drop the script body into your HDA's `PythonModule` section.
-2. Add a button parameter with this callback:
+   - **macOS / Linux**: `./install.sh`
+   - **Windows**: `install.bat`
 
-   - **Husk submitter** (Karma render):
-     ```python
-     kwargs["node"].hdaModule().submit_to_deadline(kwargs)
-     ```
-   - **USD export submitter**:
-     ```python
-     kwargs["node"].hdaModule().submit_usd_export_to_deadline(kwargs)
-     ```
+   The installer locates Houdini's `hython`, runs `install_hda.py`, and
+   writes both HDAs into `otls/`:
+   `gegenschuss_husk_deadline_submitter.hda` and
+   `gegenschuss_usd_deadline_submitter.hda`.  Override `hython` detection
+   by setting `HYTHON` (or `set HYTHON=...` on Windows).
 
-   See the comment block at the top of each `.py` for the full list of
-   recommended HDA parameter names.
+   The installer prompts for the install directory (defaults to the
+   repo's `otls/`).  If the .hda files already exist, it asks before
+   overwriting.
 
-3. Copy `secrets.example.py` to `secrets.py` next to the submitter (or
-   anywhere on Houdini's `sys.path`) and fill in your `PATH_MAP`.
+   **Optional: `install_secrets`** -- copy `install_secrets.example` to
+   `install_secrets` and put your preferred install directory on a single
+   line.  The installer will use it as the default (no need to type the
+   path each time).  `install_secrets` is gitignored.
+
+3. Load the HDAs into Houdini however you usually do.
+
+4. For path remapping (workstation -> farm), copy `secrets.example.py`
+   to `secrets.py` and fill in your `PATH_MAP`.  Place `secrets.py`
+   anywhere on Houdini's `sys.path` (e.g. `$HOUDINI_USER_PREF_DIR/python3.x/`).
+   Without it, paths pass through unchanged — fine if your workstation
+   and farm share filesystem layout.
+
+Each HDA embeds its backing `submitter_*.py` as a section, so the
+`.hda` files are fully self-contained — copy them anywhere.  After
+editing a submitter, re-run the installer to rebuild.
 
 ## Path mapping
 

@@ -8,3 +8,9 @@ secrets.py
 __pycache__/
 *.pyc
 .DS_Store
+
+# Local install path override -- per-machine, never published.
+install_secrets
+
+# Houdini HDA backups
+otls/backup/
