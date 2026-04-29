@@ -1,0 +1,10 @@
+# Local secrets (not published)
+secrets.py
+
+# Claude Code local state
+.claude/
+
+# Python bytecode
+__pycache__/
+*.pyc
+.DS_Store
