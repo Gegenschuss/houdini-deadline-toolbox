@@ -91,12 +91,10 @@ if defined ANY_EXISTS (
     echo These files already exist:
     if exist "%OUT_DIR%\%HDA1%" echo   %OUT_DIR%\%HDA1%
     if exist "%OUT_DIR%\%HDA2%" echo   %OUT_DIR%\%HDA2%
-    set "YN="
-    set /p "YN=Replace? [y/N]: "
-    if /I not "!YN!"=="y" if /I not "!YN!"=="yes" (
-        echo Cancelled.
-        exit /b 0
-    )
+    set "YN=y"
+    set /p "YN=Replace? [Y/n]: "
+    if /I "!YN!"=="n" (echo Cancelled. & exit /b 0)
+    if /I "!YN!"=="no" (echo Cancelled. & exit /b 0)
 )
 
 REM ----- Find hython.exe -----

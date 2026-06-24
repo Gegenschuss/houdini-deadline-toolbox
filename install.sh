@@ -96,10 +96,10 @@ if (( ${#EXISTING[@]} > 0 )); then
     echo
     echo "These files already exist:"
     printf '  %s\n' "${EXISTING[@]}"
-    read -r -p "Replace? [y/N]: " YN
+    read -r -p "Replace? [Y/n]: " YN
     case "$YN" in
-        [Yy]|[Yy][Ee][Ss]) ;;
-        *) echo "Cancelled."; exit 0 ;;
+        [Nn]|[Nn][Oo]) echo "Cancelled."; exit 0 ;;
+        *) ;;
     esac
 fi
 
